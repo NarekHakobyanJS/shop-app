@@ -1,20 +1,28 @@
 
 import { useEffect } from 'react'
-import './App.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getAllProducts } from './store/slices/productsSlice'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage/HomePage'
+import ProductsPage from './pages/ProductsPage/ProductsPage'
+import Layout from './components/feature/Layout/Layout'
 
 function App() {
   const dispatch = useDispatch<any>()
- 
+
   useEffect(() => {
     dispatch(getAllProducts())
   }, [])
 
   return (
-  <>
-  
-  </>
+    <>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path='/products' element={<ProductsPage />} />
+        </Route>
+      </Routes>
+    </>
   )
 }
 
